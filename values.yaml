@@ -89,8 +89,7 @@ tolerations: []
 affinity: {}
 
 isdc_verso:
-  nfs_server: nfs-isilon.astro.unige.ch
-    #nfs_server: nfs-isilon.verso.unige.ch
+  nfs_server: nfs-isilon.verso.unige.ch
 
   path_prefix: /ifs/astro/projects/integral
     #path_prefix: /ifs/verso/projects/integral
