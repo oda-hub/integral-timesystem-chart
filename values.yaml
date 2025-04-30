@@ -80,7 +80,8 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 nodeSelector:
-    astro_isilon: "true"
+    nfsRead: "True"
+    #astro_isilon: "true"
 
 
 tolerations: []
@@ -88,13 +89,27 @@ tolerations: []
 affinity: {}
 
 isdc_verso:
-  nfs_server: nfs-isilon.verso.unige.ch
+  nfs_server: nfs-isilon.astro.unige.ch
+    #nfs_server: nfs-isilon.verso.unige.ch
 
-  path_prefix: /ifs/verso/projects/integral
+  path_prefix: /ifs/astro/projects/integral
+    #path_prefix: /ifs/verso/projects/integral
 
   paths:
     rev_3: rev_3
     pvphase_nrt_ops: pvphase/nrt/ops
+
+
+isdc_astro:
+  #nfs_server: 10.40.46.34
+  nfs_server: nfs-isilon.astro.unige.ch
+
+  path_prefix: /ifs/astro/projects/integral
+
+  paths:
+    rev_3: rev_3
+    pvphase_nrt_ops: pvphase/nrt/ops
+    realtime: data/realtime
 
 
 pv_suffix: timesystem

@@ -29,9 +29,9 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       volumes:
-        - name: isilon-verso-integral
+        - name: isilon-astro-integral
           persistentVolumeClaim:
-            claimName: pvc-isilon-verso-integral{{ .Values.pv_suffix }}
+            claimName: pvc-isilon-astro-integral{{ .Values.pv_suffix }}
 
       containers:
         - name: {{ .Chart.Name }}
@@ -47,10 +47,16 @@ spec:
             httpGet:
               path: /healthcheck
               port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            failureThreshold: 10
           readinessProbe:
             httpGet:
               path: /healthcheck
               port: http
+            initialDelaySeconds: 10
+            periodSeconds: 20
+            failureThreshold: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
 
@@ -62,23 +68,23 @@ spec:
 
           volumeMounts:
           - mountPath: /data/arc/rev_3
-            name: isilon-verso-integral
-            subPath: {{ .Values.isdc_verso.paths.rev_3 }}
+            name: isilon-astro-integral
+            subPath: {{ .Values.isdc_astro.paths.rev_3 }}
           {{- include "archive_mount_options" . | nindent 12 }}
 
           - mountPath: /data/rep_base_prod
-            name: isilon-verso-integral
-            subPath: {{ .Values.isdc_verso.paths.rev_3 }}
+            name: isilon-astro-integral
+            subPath: {{ .Values.isdc_astro.paths.rev_3 }}
           {{- include "archive_mount_options" . | nindent 12 }}
 
           - mountPath: /isdc/arc/rev_3
-            name: isilon-verso-integral
-            subPath: {{ .Values.isdc_verso.paths.rev_3 }}
+            name: isilon-astro-integral
+            subPath: {{ .Values.isdc_astro.paths.rev_3 }}
           {{- include "archive_mount_options" . | nindent 12 }}
 
           - mountPath: /data/rep_base_prod_nrt
-            name: isilon-verso-integral
-            subPath: {{ .Values.isdc_verso.paths.pvphase_nrt_ops }}
+            name: isilon-astro-integral
+            subPath: {{ .Values.isdc_astro.paths.pvphase_nrt_ops }}
           {{- include "archive_mount_options" . | nindent 12 }}
 
 
